@@ -25,7 +25,7 @@ function PostCard({ post }: PostCardProps) {
           Read more →
         </Link>
 
-        <LikeButton />
+        <LikeButton postId={post.id} />
       </div>
     </article>
   )

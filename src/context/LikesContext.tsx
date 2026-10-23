@@ -2,8 +2,8 @@ import { createContext, useContext, useState } from 'react'
 import type { ReactNode } from 'react'
 
 type LikesContextValue = {
-  likes: number
-  addLike: () => void
+  likes: Record<number, number>
+  addLike: (postId: number) => void
 }
 
 const LikesContext = createContext<LikesContextValue | undefined>(
@@ -15,10 +15,13 @@ type LikesProviderProps = {
 }
 
 export function LikesProvider({ children }: LikesProviderProps) {
-  const [likes, setLikes] = useState(0)
+  const [likes, setLikes] = useState<Record<number, number>>({})
 
-  function addLike() {
-    setLikes((current) => current + 1)
+  function addLike(postId: number) {
+    setLikes((current) => ({
+      ...current,
+      [postId]: (current[postId] ?? 0) + 1,
+    }))
   }
 
   return (
