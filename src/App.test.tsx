@@ -3,11 +3,14 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, test } from 'vitest'
 import { MemoryRouter } from 'react-router'
 import App from './App'
+import { LikesProvider } from './context/LikesContext'
 
 function renderApp(initialPath = '/') {
   return render(
     <MemoryRouter initialEntries={[initialPath]}>
-      <App />
+      <LikesProvider>
+        <App />
+      </LikesProvider>
     </MemoryRouter>,
   )
 }
@@ -42,7 +45,9 @@ describe('Blog app', () => {
 
     renderApp('/posts')
 
-    const likeButtons = screen.getAllByRole('button')
+    const likeButtons = screen.getAllByRole('button', {
+      name: /♥ 0/,
+    })
 
     expect(likeButtons[0]).toHaveTextContent('♥ 0')
 

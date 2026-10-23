@@ -1,6 +1,9 @@
 import { NavLink, Outlet } from 'react-router'
+import { useLikes } from '../context/LikesContext'
 
 function Layout() {
+  const { likes } = useLikes()
+
   return (
     <div className="site-shell">
       <header className="site-header">
@@ -24,6 +27,10 @@ function Layout() {
               Protected
             </NavLink>
           </nav>
+
+          <div className="likes-count">
+            ♥ {likes}
+          </div>
         </div>
       </header>
 

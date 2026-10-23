@@ -1,17 +1,13 @@
-import { useState } from 'react'
+import { useLikes } from '../context/LikesContext'
 
-type LikeButtonProps = {
-  initialLikes?: number
-}
-
-function LikeButton({ initialLikes = 0 }: LikeButtonProps) {
-  const [likes, setLikes] = useState(initialLikes)
+function LikeButton() {
+  const { likes, addLike } = useLikes()
 
   return (
     <button
       className="like-button"
       type="button"
-      onClick={() => setLikes((current) => current + 1)}
+      onClick={addLike}
     >
       ♥ {likes}
     </button>
